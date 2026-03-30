@@ -1,35 +1,50 @@
-# anthropic-hackathon
+# OpenFloor
 
-This is a [Next.js](https://nextjs.org) project bootstrapped with [v0](https://v0.app).
+OpenFloor is a civic video platform for the Governance & Collaboration track. It helps people
+understand long political and public-interest recordings by turning them into timestamped summaries,
+notable statements, clip-based discussions, and source-aware public threads.
 
-## Built with v0
+The current repo includes:
 
-This repository is linked to a [v0](https://v0.app) project. You can continue developing by visiting the link below -- start new chats to make changes, and v0 will push commits directly to this repo. Every merge to `main` will automatically deploy.
+- A Next.js + TypeScript + Tailwind app shell
+- Built-in demo-user access for posting and participation
+- Gemini-powered video processing hooks for transcript analysis and clip generation
+- Drizzle ORM with a lightweight SQLite-backed local prototype
+- Public browsing for videos, clips, sources, and topics
+- Local-storage utilities for draft comments, UI preferences, and recently viewed content
 
-[Continue working on v0 →](https://v0.app/chat/projects/prj_ia6cgZPy4rhFTWb54pkJ8pC1GWV8)
+## Product Direction
+
+OpenFloor is designed to:
+
+- Make civic video easier to understand
+- Preserve provenance and surrounding context
+- Distinguish official-source content from user submissions
+- Support constructive, threaded public discussion
+- Reduce decontextualized outrage bait
+
+The detailed product blueprint lives in [docs/openfloor-blueprint.md](docs/openfloor-blueprint.md).
 
 ## Getting Started
 
-First, run the development server:
+1. Copy `.env.example` to `.env` and fill in Gemini and optional demo-user labels.
+2. Install dependencies with `npm install`.
+3. Push the local schema with `npm run db:push`.
+4. Start the app with `npm run dev`.
+
+Then open [http://localhost:3000](http://localhost:3000).
+
+## Useful Scripts
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+npm run build
+npm run typecheck
+npm run db:push
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Notes
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-## Learn More
-
-To learn more, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-- [v0 Documentation](https://v0.app/docs) - learn about v0 and how to use it.
-
-<a href="https://v0.app/chat/api/kiro/clone/shreyashmishra/anthropic-hackathon" alt="Open in Kiro"><img src="https://pdgvvgmkdvyeydso.public.blob.vercel-storage.com/open%20in%20kiro.svg?sanitize=true" /></a>
+- The current implementation uses SQLite for local development speed. The blueprint recommends
+  PostgreSQL for deployed shared environments.
+- `npm run lint` is still not wired up with an ESLint dependency/config in this repo.
