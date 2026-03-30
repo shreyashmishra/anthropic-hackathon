@@ -1,59 +1,72 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Plus } from "lucide-react"
+import { useState } from "react";
+import { Plus } from "lucide-react";
 
 const faqs = [
   {
-    question: "What is Outchat.ai and how does it work?",
+    question: "How does OpenFloor stay nonpartisan if it highlights political moments?",
     answer:
-      "Outchat.ai is a platform that allows you to create, train, and monetize your own AI chat assistant. You can customize it with your knowledge, brand it with your colors and logo, and sell access to your clients.",
+      "The product is designed to surface policy-relevant statements, procedural decisions, and substantive claims, not the most inflammatory content. Every highlighted moment links back to the original recording, includes context, and explains why the system considered it notable.",
   },
   {
-    question: "How does Outchat.ai use my data to build a custom AI chat?",
+    question: "Can people browse without creating an account?",
     answer:
-      "We use your uploaded files, documents, and website content to train your AI assistant. Your data is used exclusively to power your chat and is never shared with other users or used to train other models.",
+      "Yes. Public browsing is a core requirement. Anyone can read videos, clips, summaries, and discussions without creating an account, and the current hackathon build uses a lightweight local login portal only when someone wants to participate.",
   },
   {
-    question: "How do I get started with Outchat.ai and what are the pricing options?",
+    question: "What happens when Gemini gets something wrong?",
     answer:
-      "Getting started is easy - sign up, upload your knowledge base, customize your branding, and launch. We offer flexible pricing plans based on usage, with options for free trials and premium tiers.",
+      "AI outputs are clearly labeled as generated assistance, not authoritative truth. The product should distinguish verified facts, disputed claims, and opinions where possible, while always pointing users back to the original source material for verification.",
   },
-]
+  {
+    question: "Why separate official government sources from user submissions?",
+    answer:
+      "Because provenance matters. Officially ingested content should be visibly labeled so users understand whether a clip came directly from a government or public institution feed versus a user-submitted public link.",
+  },
+  {
+    question: "Why use local storage at all if there is a backend?",
+    answer:
+      "Local storage keeps lightweight, per-device state off the server: draft comments, UI preferences, recently viewed clips, onboarding state, and collapsed thread settings. Shared civic records, moderation data, and canonical summaries remain in the database.",
+  },
+];
 
 export function FaqSection() {
-  const [openIndex, setOpenIndex] = useState<number | null>(null)
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section className="py-24 px-6 bg-background">
-      <div className="max-w-5xl mx-auto">
-        <div className="grid md:grid-cols-2 gap-12">
-          <div>
-            <h2 className="font-serif text-3xl md:text-4xl">
-              Frequently asked
-              <br />
-              questions
-            </h2>
-          </div>
-          <div className="space-y-0">
-            {faqs.map((faq, index) => (
-              <div key={index} className="border-t">
-                <button
-                  onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                  className="w-full flex items-center justify-between py-5 text-left"
-                >
-                  <span className="text-sm pr-4">{faq.question}</span>
-                  <Plus
-                    className={`w-4 h-4 flex-shrink-0 transition-transform ${openIndex === index ? "rotate-45" : ""}`}
-                  />
-                </button>
-                {openIndex === index && <div className="pb-5 text-sm text-muted-foreground">{faq.answer}</div>}
-              </div>
-            ))}
-            <div className="border-t" />
-          </div>
+    <section className="bg-background px-6 py-24">
+      <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-[0.9fr_1.1fr]">
+        <div>
+          <p className="text-sm font-semibold uppercase tracking-[0.22em] text-primary">FAQ</p>
+          <h2 className="mt-4 font-serif text-3xl text-balance sm:text-4xl lg:text-5xl">
+            Questions the product has to answer up front.
+          </h2>
+          <p className="mt-4 max-w-md text-base leading-7 text-muted-foreground">
+            Trust, transparency, provenance, and anonymous browsing are product requirements, not
+            optional polish.
+          </p>
+        </div>
+
+        <div className="rounded-[28px] border border-border/70 bg-card/80 px-6">
+          {faqs.map((faq, index) => (
+            <div key={faq.question} className="border-b border-border/70 last:border-b-0">
+              <button
+                onClick={() => setOpenIndex(openIndex === index ? null : index)}
+                className="flex w-full items-center justify-between gap-4 py-5 text-left"
+              >
+                <span className="text-base font-medium">{faq.question}</span>
+                <Plus
+                  className={`h-4 w-4 shrink-0 transition-transform ${openIndex === index ? "rotate-45" : ""}`}
+                />
+              </button>
+              {openIndex === index ? (
+                <div className="pb-5 text-sm leading-7 text-muted-foreground">{faq.answer}</div>
+              ) : null}
+            </div>
+          ))}
         </div>
       </div>
     </section>
-  )
+  );
 }
