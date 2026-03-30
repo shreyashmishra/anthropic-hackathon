@@ -7,9 +7,9 @@ import "./globals.css"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Outchat - Launch and monetize your own branded AI chat",
-  description: "Turn your knowledge into revenue. Train a custom AI chat your clients will rely on and pay for.",
-  generator: "v0.app",
+  title: "CivicBrief — Stay Informed in Minutes, Not Hours",
+  description:
+    "CivicBrief analyzes political debates and clips the moments that matter most to you — personalized to your interests.",
 }
 
 export default function RootLayout({

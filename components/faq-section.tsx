@@ -5,19 +5,24 @@ import { Plus } from "lucide-react"
 
 const faqs = [
   {
-    question: "What is Outchat.ai and how does it work?",
+    question: "Is the summary biased toward one political party?",
     answer:
-      "Outchat.ai is a platform that allows you to create, train, and monetize your own AI chat assistant. You can customize it with your knowledge, brand it with your colors and logo, and sell access to your clients.",
+      "No. CivicBrief is deliberately nonpartisan. Every clip summary presents what each candidate actually said, in their own words, without editorial framing. We show both the left-leaning and right-leaning perspective side by side so you can form your own opinion.",
   },
   {
-    question: "How does Outchat.ai use my data to build a custom AI chat?",
+    question: "What types of videos does CivicBrief support?",
     answer:
-      "We use your uploaded files, documents, and website content to train your AI assistant. Your data is used exclusively to power your chat and is never shared with other users or used to train other models.",
+      "We support presidential debates, vice-presidential debates, Senate and House hearings, town halls, press conferences, and major political speeches from YouTube, C-SPAN, and most major news network embed links. If the video has audio, we can analyze it.",
   },
   {
-    question: "How do I get started with Outchat.ai and what are the pricing options?",
+    question: "How does CivicBrief personalize results to me?",
     answer:
-      "Getting started is easy - sign up, upload your knowledge base, customize your branding, and launch. We offer flexible pricing plans based on usage, with options for free trials and premium tiers.",
+      "When you set up your profile, you select the policy areas that affect your daily life — such as healthcare costs, housing, student debt, or immigration. Our AI ranks and filters the debate clips so the most relevant moments for your interests appear first.",
+  },
+  {
+    question: "Will you store or share my political interests?",
+    answer:
+      "Your interest profile is stored only to personalize your experience and is never sold or shared with third parties, advertisers, or political campaigns. You can delete your profile at any time.",
   },
 ]
 
@@ -25,7 +30,7 @@ export function FaqSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
 
   return (
-    <section className="py-24 px-6 bg-background">
+    <section id="faq" className="py-24 px-6 bg-background">
       <div className="max-w-5xl mx-auto">
         <div className="grid md:grid-cols-2 gap-12">
           <div>
@@ -34,6 +39,12 @@ export function FaqSection() {
               <br />
               questions
             </h2>
+            <p className="mt-4 text-muted-foreground text-sm">
+              Have more questions?{" "}
+              <a href="#" className="underline hover:text-foreground">
+                Contact us
+              </a>
+            </p>
           </div>
           <div className="space-y-0">
             {faqs.map((faq, index) => (

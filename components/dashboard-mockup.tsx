@@ -1,4 +1,35 @@
-import { Globe } from "lucide-react"
+"use client"
+
+import { Globe, Clock, CheckCircle } from "lucide-react"
+
+const clips = [
+  {
+    topic: "Healthcare",
+    topicColor: "bg-emerald-100 text-emerald-700",
+    timestamp: "23:14 – 27:52",
+    duration: "4m 38s",
+    title: "Medicare Drug Pricing — What Changes for Seniors",
+    matched: "Healthcare",
+    bullets: [
+      "Candidate A proposes capping insulin at $35/month for all Americans",
+      "Candidate B argues market competition drives down prices better than regulation",
+      "Key dispute: whether the Inflation Reduction Act's provisions should expand",
+    ],
+  },
+  {
+    topic: "Economy",
+    topicColor: "bg-amber-100 text-amber-700",
+    timestamp: "8:03 – 14:17",
+    duration: "6m 14s",
+    title: "Inflation & Cost of Living — Competing Plans",
+    matched: "Economy",
+    bullets: [
+      "Candidate A says inflation dropped from 9% peak to near 3% under current policies",
+      "Candidate B attributes high prices to 'the worst inflation in 40 years'",
+      "Both propose different tax strategies targeting the middle class",
+    ],
+  },
+]
 
 export function DashboardMockup() {
   return (
@@ -13,200 +44,95 @@ export function DashboardMockup() {
         <div className="flex-1 flex justify-center">
           <div className="flex items-center gap-2 px-3 py-1 bg-muted rounded-md text-xs text-muted-foreground">
             <Globe className="w-3 h-3" />
-            app-cf78suqho.outchat.ai
+            app.civicbrief.ai/demo
           </div>
         </div>
       </div>
 
       <div className="flex">
         {/* Sidebar */}
-        <div className="w-56 border-r bg-muted/20 p-4 hidden md:block">
+        <div className="w-56 border-r bg-muted/10 p-4 hidden md:block">
           <div className="flex items-center gap-2 mb-6">
-            <div className="text-xs text-muted-foreground">MA</div>
-            <span className="text-sm font-medium">Marketing Advisor</span>
+            <span className="font-serif text-sm italic">
+              <span className="text-blue-700">Civic</span>Brief
+            </span>
           </div>
           <nav className="space-y-1">
-            <div className="flex items-center gap-2 px-2 py-1.5 text-sm text-muted-foreground">
-              <span>▸</span> View site
-            </div>
-            <div className="flex items-center gap-2 px-2 py-1.5 text-sm text-muted-foreground">
-              <span>✦</span> Training
-            </div>
-            <div className="flex items-center gap-2 px-2 py-1.5 text-sm bg-muted rounded">
-              <span>◉</span> Design
-            </div>
-            <div className="flex items-center gap-2 px-2 py-1.5 text-sm text-muted-foreground">
-              <span>⊕</span> Domains
-            </div>
-            <div className="flex items-center gap-2 px-2 py-1.5 text-sm text-muted-foreground">
-              <span>$</span> Get paid
-            </div>
-            <div className="flex items-center gap-2 px-2 py-1.5 text-sm text-muted-foreground">
-              <span>☰</span> Chat logs
-            </div>
-            <div className="flex items-center gap-2 px-2 py-1.5 text-sm text-muted-foreground">
-              <span>☺</span> Users
-            </div>
-            <div className="flex items-center gap-2 px-2 py-1.5 text-sm text-muted-foreground">
-              <span>⚙</span> Settings
-            </div>
+            {[
+              { icon: "▸", label: "My Briefs", active: false },
+              { icon: "✦", label: "Analyze Video", active: false },
+              { icon: "◉", label: "Results", active: true },
+              { icon: "⊕", label: "Saved Clips", active: false },
+              { icon: "⚙", label: "My Interests", active: false },
+            ].map((item) => (
+              <div
+                key={item.label}
+                className={`flex items-center gap-2 px-2 py-1.5 text-sm rounded cursor-pointer ${
+                  item.active ? "bg-blue-50 text-blue-700" : "text-muted-foreground"
+                }`}
+              >
+                <span>{item.icon}</span> {item.label}
+              </div>
+            ))}
           </nav>
-          <div className="mt-auto pt-8">
-            <div className="text-xs text-muted-foreground">Messages</div>
-            <div className="text-sm">0 / 100</div>
-            <div className="text-xs text-purple-500 mt-1">Upgrade</div>
-            <div className="flex items-center gap-2 mt-4">
-              <div className="w-6 h-6 rounded-full bg-purple-100" />
-              <span className="text-sm">Nikolas Gibbons</span>
-            </div>
-          </div>
         </div>
 
-        {/* Design panel */}
-        <div className="w-64 border-r p-4 hidden lg:block">
-          <div className="flex items-center justify-between mb-6">
-            <h3 className="font-medium">Design</h3>
-            <div className="flex gap-1">
-              <button className="px-3 py-1 text-xs bg-muted rounded">General</button>
-              <button className="px-3 py-1 text-xs text-muted-foreground">About</button>
-              <button className="px-3 py-1 text-xs text-muted-foreground">Pricing</button>
+        {/* Main content */}
+        <div className="flex-1 p-5 overflow-hidden">
+          {/* Brief header */}
+          <div className="mb-4">
+            <div className="flex items-center gap-2 mb-1">
+              <CheckCircle className="w-4 h-4 text-green-500" />
+              <span className="text-sm font-medium">Brief ready</span>
+            </div>
+            <h3 className="font-semibold text-base">2024 Presidential Debate</h3>
+            <div className="flex items-center gap-3 mt-1">
+              <span className="flex items-center gap-1 text-xs text-muted-foreground">
+                <Clock className="w-3 h-3" /> 1h 47m analyzed
+              </span>
+              <span className="text-xs text-muted-foreground">4 clips · 24 min of highlights</span>
             </div>
           </div>
-          <div className="space-y-4">
-            <div>
-              <label className="text-sm text-muted-foreground">Display name</label>
-              <div className="flex items-center justify-between mt-1">
-                <span className="text-sm"></span>
-                <div className="w-4 h-4 border rounded" />
-              </div>
-            </div>
-            <div>
-              <label className="text-sm text-muted-foreground">Logo</label>
-              <div className="flex items-center justify-between mt-1">
-                <span className="text-sm"></span>
-                <div className="w-8 h-4 bg-muted rounded-full relative">
-                  <div className="absolute right-0.5 top-0.5 w-3 h-3 bg-white rounded-full shadow" />
-                </div>
-              </div>
-            </div>
-            <div className="bg-purple-50 rounded-lg p-4">
-              <div className="flex items-center gap-2">
-                <div className="w-10 h-10 rounded-full bg-purple-500 flex items-center justify-center">
-                  <span className="text-white text-xs">NG</span>
-                </div>
-                <div>
-                  <div className="text-sm font-medium">Nikolas Gibbons</div>
-                  <div className="text-xs text-muted-foreground">Marketing Advisor</div>
-                </div>
-              </div>
-            </div>
-            <div>
-              <label className="text-sm text-muted-foreground">Favicon</label>
-              <div className="flex items-center justify-between mt-1">
-                <span className="text-xs text-muted-foreground">Square image at least 32×32</span>
-                <div className="w-6 h-6 rounded bg-purple-500 flex items-center justify-center">
-                  <span className="text-white text-xs">✦</span>
-                </div>
-              </div>
-            </div>
-            <div>
-              <label className="text-sm text-muted-foreground">Background</label>
-            </div>
-            <div>
-              <label className="text-sm text-muted-foreground">Accent</label>
-              <div className="w-6 h-6 rounded-full bg-foreground mt-1" />
-            </div>
-            <div>
-              <label className="text-sm text-muted-foreground">Heading</label>
-              <div className="flex flex-wrap gap-1.5 mt-1">
-                {[
-                  "#ef4444",
-                  "#f97316",
-                  "#eab308",
-                  "#22c55e",
-                  "#14b8a6",
-                  "#06b6d4",
-                  "#3b82f6",
-                  "#8b5cf6",
-                  "#ec4899",
-                  "#f43f5e",
-                  "#0ea5e9",
-                  "#6366f1",
-                  "#a855f7",
-                  "#d946ef",
-                  "#1e293b",
-                  "#374151",
-                  "#4b5563",
-                  "#6b7280",
-                ].map((color) => (
-                  <div key={color} className="w-5 h-5 rounded-full cursor-pointer" style={{ backgroundColor: color }} />
-                ))}
-              </div>
-            </div>
-            <div>
-              <label className="text-sm text-muted-foreground">Description</label>
-              <div className="text-xs mt-1">#000000</div>
-              <div className="text-xs text-muted-foreground mt-1">
-                Start by
-                <br />w your agent responds.
-              </div>
-            </div>
+
+          {/* Interest tags */}
+          <div className="flex gap-2 mb-4 flex-wrap">
+            {["Economy", "Healthcare", "Social Security"].map((tag) => (
+              <span key={tag} className="px-2 py-0.5 text-xs bg-blue-50 text-blue-700 border border-blue-200 rounded-full">
+                {tag}
+              </span>
+            ))}
           </div>
-          <div className="flex gap-2 mt-6">
-            <button className="px-3 py-1.5 text-sm border rounded">Discard changes</button>
-            <button className="px-3 py-1.5 text-sm bg-foreground text-background rounded">Save changes</button>
-          </div>
-        </div>
 
-        {/* Chat preview */}
-        <div className="flex-1 p-4">
-          <ChatPreview />
-        </div>
-      </div>
-    </div>
-  )
-}
-
-function ChatPreview() {
-  return (
-    <div className="bg-white rounded-lg border shadow-sm overflow-hidden">
-      {/* Chat header */}
-      <div className="flex items-center justify-between px-4 py-3 border-b">
-        <div className="flex items-center gap-2">
-          <div className="w-6 h-6 rounded-full bg-purple-500 flex items-center justify-center">
-            <span className="text-white text-xs">NG</span>
-          </div>
-          <span className="text-sm font-medium">Nikolas Gibbons</span>
-        </div>
-        <nav className="flex items-center gap-4">
-          <span className="text-sm text-muted-foreground">Chat</span>
-          <span className="text-sm text-muted-foreground">About</span>
-          <span className="text-sm text-muted-foreground">Pricing</span>
-          <span className="text-sm text-muted-foreground">Log in</span>
-          <button className="px-3 py-1 text-xs bg-foreground text-background rounded-full">Sign up</button>
-        </nav>
-      </div>
-
-      {/* Chat content */}
-      <div className="p-8 text-center">
-        <h2 className="text-xl font-semibold mb-2">How can I help?</h2>
-        <p className="text-sm text-muted-foreground mb-6">
-          Start by asking a question or
-          <br />
-          customizing how your agent responds.
-        </p>
-
-        <div className="max-w-md mx-auto">
-          <div className="border rounded-lg p-3">
-            <input type="text" placeholder="Ask anything" className="w-full text-sm outline-none" />
-            <div className="flex items-center justify-between mt-2">
-              <div className="flex items-center gap-1 text-xs text-muted-foreground">
-                <span>📎</span> 0 Files
+          {/* Clips */}
+          <div className="space-y-3">
+            {clips.map((clip, i) => (
+              <div key={i} className="border rounded-lg p-4 bg-white shadow-sm">
+                <div className="flex items-start justify-between gap-2 mb-2">
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <span className={`px-2 py-0.5 text-xs rounded-full font-medium ${clip.topicColor}`}>
+                      {clip.topic}
+                    </span>
+                    <span className="text-xs text-muted-foreground">{clip.timestamp}</span>
+                    <span className="text-xs text-muted-foreground">· {clip.duration}</span>
+                  </div>
+                </div>
+                <p className="text-sm font-medium mb-1">{clip.title}</p>
+                <p className="text-xs text-blue-600 mb-2">⭐ Matched your interest in {clip.matched}</p>
+                <ul className="space-y-1">
+                  {clip.bullets.map((b, j) => (
+                    <li key={j} className="text-xs text-muted-foreground flex gap-1.5">
+                      <span className="mt-0.5 shrink-0">•</span>
+                      <span>{b}</span>
+                    </li>
+                  ))}
+                </ul>
+                <div className="flex gap-2 mt-3">
+                  <button className="px-3 py-1 text-xs bg-blue-700 text-white rounded-full">▶ Watch Clip</button>
+                  <button className="px-3 py-1 text-xs border rounded-full text-muted-foreground">Left View</button>
+                  <button className="px-3 py-1 text-xs border rounded-full text-muted-foreground">Right View</button>
+                </div>
               </div>
-              <button className="w-7 h-7 rounded-full bg-purple-500 flex items-center justify-center">
-                <span className="text-white text-xs">↑</span>
-              </button>
-            </div>
+            ))}
           </div>
         </div>
       </div>
